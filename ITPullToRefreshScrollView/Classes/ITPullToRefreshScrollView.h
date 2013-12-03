@@ -49,6 +49,8 @@ typedef NS_ENUM(NSUInteger, ITPullToRefreshEdge) {
 - (void)pullToRefreshView:(ITPullToRefreshScrollView *)scrollView
     didStopRefreshingEdge:(ITPullToRefreshEdge)edge;
 
+- (void)pullToRefreshView:(ITPullToRefreshScrollView *)scrollView didScrollToVisibleRect:(NSRect)rect;
+
 @end
 
 

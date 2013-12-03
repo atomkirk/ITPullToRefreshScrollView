@@ -54,8 +54,8 @@ void dispatch_sync_on_main(dispatch_block_t block) {
 
 - (void)initialSetup {
     _edgeViews = [NSMutableDictionary dictionary];
-    [self installCustomClipView];
-    
+//    [self installCustomClipView];
+
     self.contentView.postsBoundsChangedNotifications = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(boundsDidChange:) name:NSViewBoundsDidChangeNotification object:self.contentView];
 }
@@ -72,7 +72,7 @@ void dispatch_sync_on_main(dispatch_block_t block) {
     
     newClipView.documentView = self.contentView.documentView;
     self.contentView = newClipView;
-    
+
     newClipView.translatesAutoresizingMaskIntoConstraints = NO;
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:
                           @"H:|[view]|" options:0 metrics:nil views:@{@"view": newClipView}]];
@@ -85,7 +85,11 @@ void dispatch_sync_on_main(dispatch_block_t block) {
 
 - (void)scrollingChangedWithEvent:(NSEvent *)theEvent {
     if (_isLocked) return;
-    
+
+    if ([self.delegate respondsToSelector:@selector(pullToRefreshView:didScrollToVisibleRect:)]) {
+        [self.delegate pullToRefreshView:self didScrollToVisibleRect:self.contentView.bounds];
+    }
+
     void (^scrollBlock)(ITPullToRefreshEdge edge, CGFloat (^progressBlock)(void)) =
     ^(ITPullToRefreshEdge edge, CGFloat (^progressBlock)()) {
         if (!(_refreshingEdges & edge)) {

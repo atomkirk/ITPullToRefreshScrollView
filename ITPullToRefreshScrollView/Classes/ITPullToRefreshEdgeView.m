@@ -159,8 +159,8 @@
 }
 
 - (void)drawBackgroundInRect:(NSRect)dirtyRect {
-    [[NSColor colorWithDeviceWhite:0.96 alpha:1.0] set];
-    NSRectFill(dirtyRect);
+//    [[NSColor colorWithDeviceWhite:0.96 alpha:1.0] set];
+//    NSRectFill(dirtyRect);
 }
 
 - (void)pullToRefreshScrollView:(ITPullToRefreshScrollView *)scrollView didScrollWithProgress:(CGFloat)progress {
@@ -183,9 +183,8 @@
 
 - (void)pullToRefreshScrollViewDidStartRefreshing:(ITPullToRefreshScrollView *)scrollView {
     CGFloat tension = (_cachedProgress - 1.0 <= kSpringRange)?_cachedProgress - 1:kSpringRange;
-    CGFloat duration = kMaxSpinAnimationDuration - ((kMaxSpinAnimationDuration - kMinSpinAnimationDuration) * (1.0 / kSpringRange * tension));
     
-    [self.progressIndicator.layer addAnimation:[self rotationAnimationWithDuration:duration] forKey:@"rotation"];
+//    [self.progressIndicator.layer addAnimation:[self rotationAnimationWithDuration:duration] forKey:@"rotation"];
     self.progressIndicator.isIndeterminate = YES;
     self.progressIndicator.animates = YES;
 }
@@ -194,7 +193,7 @@
     self.progressIndicator.animates = NO;
     self.progressIndicator.isIndeterminate = NO;
 
-    [self.progressIndicator.layer addAnimation:[self shrinkAnimation] forKey:@"shrink"];
+//    [self.progressIndicator.layer addAnimation:[self shrinkAnimation] forKey:@"shrink"];
 }
 
 - (void)pullToRefreshScrollViewDidStopAnimating:(ITPullToRefreshScrollView *)scrollView {
