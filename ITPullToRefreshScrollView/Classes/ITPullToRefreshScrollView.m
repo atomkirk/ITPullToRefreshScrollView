@@ -85,7 +85,7 @@ void dispatch_sync_on_main(dispatch_block_t block) {
 
 - (void)scrollingChangedWithEvent:(NSEvent *)theEvent {
     if (_isLocked) return;
-
+    
     if ([self.delegate respondsToSelector:@selector(pullToRefreshView:didScrollToVisibleRect:)]) {
         [self.delegate pullToRefreshView:self didScrollToVisibleRect:self.contentView.bounds];
     }
